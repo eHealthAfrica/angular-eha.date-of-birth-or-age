@@ -1,0 +1,62 @@
+<div class="component date-of-birth-or-age">
+  <form name="dateOfBirthOrAgeDirectiveForm">
+    <label class="block" translate>Date of birth:</label>
+    <!-- Whitespace between elements is significant, please don't reformat the next 3 divs -->
+    <div class="form-group birthday">
+      <label translate>Day</label><br/>
+      <select class="form-control"
+        name="birthDay"
+        ng-model="model.birthDay"
+        ng-options="day for day in days track by day"
+        tab-to-next-input-on-enter
+        >
+      </select>
+      </div><div class="form-group month">
+      <label translate>Month</label><br/>
+      <select class="form-control"
+        name="birthMonth"
+        ng-model="model.birthMonth"
+        ng-options="months.indexOf(month) as month for month in months"
+        tab-to-next-input-on-enter >
+      </select>
+      </div><div class="form-group year">
+      <label translate>Year</label><br/>
+      <select class="form-control"
+        name="birthYear"
+        ng-model="model.birthYear"
+        ng-options="year for year in years track by year"
+        tab-to-next-input-on-enter >
+      </select>
+    </div>
+    <label class="block" translate>Age:</label>
+    <div class="form-group age-years">
+      <label translate>Years</label><br/>
+      <input
+        type="number"
+        min="0"
+        max="120"
+        step="1"
+        class="form-control center-text"
+        name="ageYears"
+        ng-model="model.age.years"
+        select-on-focus
+        tab-to-next-input-on-enter
+      />
+      <!-- Whitespace is significant, please don't reformat the next line -->
+      </div><span class="backslash">/</span><div class="form-group age-months">
+      <label translate>Months</label><br/>
+      <input
+        name="ageMonths"
+        type="number"
+        min="0"
+        max="11"
+        step="1"
+        class="form-control center-text"
+        name="ageMonths"
+        ng-model="model.age.months"
+        select-on-focus
+        tab-to-next-input-on-enter
+      />
+    </div>
+  </form>
+</div>
