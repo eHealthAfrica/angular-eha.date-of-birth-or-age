@@ -5,7 +5,7 @@ describe('eha.date-of-birth-or-age.service', function() {
   var service;
   beforeEach(module('eha.date-of-birth-or-age.service', function($provide) {
     // Fake the current date so that our tests don't fail in the future
-    sinon.useFakeTimers(new Date(2015,2,1).getTime());
+    sinon.useFakeTimers(new Date(2015, 2, 1).getTime());
   }));
 
   beforeEach(inject(function(_ehaDateOfBirthOrAgeService_) {

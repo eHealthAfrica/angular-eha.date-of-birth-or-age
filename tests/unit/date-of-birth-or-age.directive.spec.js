@@ -3,7 +3,7 @@ describe('eha.date-of-birth-or-age.directive', function() {
   'use strict';
   beforeEach(function() {
     // Fake the current date so that our tests don't fail in the future
-    sinon.useFakeTimers(new Date(2015,2,1).getTime());
+    sinon.useFakeTimers(new Date(2015, 2, 1).getTime());
   });
 
   beforeEach(module('eha.date-of-birth-or-age.template'));
