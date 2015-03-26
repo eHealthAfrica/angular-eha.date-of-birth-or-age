@@ -1,7 +1,7 @@
 {
   "name": "angular-eha.date-of-birth-or-age",
   "description": "Date of Birth or Age directive",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "authors": [
     "Matt Richards <matt@lucidmoon.co.uk>"
   ],
