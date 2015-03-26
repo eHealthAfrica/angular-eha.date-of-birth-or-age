@@ -45,19 +45,33 @@ Then you're free to include whichever bundle you prefer in what ever manner you 
 ### Example
 
 ```html
-<html ng-app="backButtonExample">
+<html ng-app="dobExample">
   <head>
     <title>Back Button Example</title>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-eha.date-of-birth-or-age/dist/date-of-birth-or-age.template.js"></script>
     <script>
-    angular.module('backButtonExample', [
-      'eha.date-of-birth-or-age'
-    ]);
+      var app = angular.module('dobExample', [
+        'eha.date-of-birth-or-age'
+      ]);
+
+      app.controller('MyCtrl', function($scope) {
+        $scope.person = {
+          birthYear: '',
+          birthMonth: '',
+          birthDay: '',
+          age: {
+            years: '',
+            months: ''
+          }
+        }
+      });
     </script>
   </head>
   <body>
-    <!-- Put an example here! -->
+    <div ng-controller="MyCtrl">
+      <eha-date-of-birth-or-age model="person"></eha-date-of-birth-or-age>
+    </div>
   </body>
 </html>
 ```
@@ -130,45 +144,14 @@ This will compile the templates to the `dist/` folder. But it's probably best to
 If you need to override the default template, simply replace what's already in the `$templateCache` with what ever you want. One way to achieve this is like this:
 
 ```html
-<script id="templates/back-button.directive.tpl.html" type="text/html">
-    <button>I'm a button!</button>
+<script id="templates/date-of-birth-or-age.directive.tpl.html" type="text/html">
+  // Your markup here
 </script>
 ```
 
-## Release Process
-
-To make a release, ensure you have issued `grunt build`, committed the distribution package and tagged the commit with an appropriate version according to the [SemVer spec](http://semver.org/).
-
-To make this easy for you, there's a handy grunt task. Simply issue `grunt release:major|minor|patch` and grunt will take care of building, committing and tagging for you. Then make a PR to the master branch of the upstream, merge upon CI build success and then all that's left to do is to push the tags to the upstream.
-
-e.g:
-
-```bash
-  grunt release:minor
-  git pull-request -b <upstream_repo>:master
-  git push upstream --tags
-```
-
-### Publishing to npm
-
-To publish a new version to npm, simply issue from the command line prior making a release (i.e.issuing a `grunt release` and pushing both commits and tags to the upstream):
-
-```
-npm publish
-```
-
-### Publishing to bower
-
-Publishing to bower is slightly simpler in so far that you only have to do it once, and not explicitly for every release like npm:
-
-e.g.
-
-```
-bower register angular-eha.date-of-birth-or-age <upstream_repo_url>
-```
 ## License
 
-Copyright 2015 Matt Richards <matt@lucidmoon.co.uk>
+Copyright 2015 Matt Richards <matt.richards@ehealthafrica.org>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at
 
