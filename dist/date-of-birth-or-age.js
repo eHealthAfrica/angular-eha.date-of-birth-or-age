@@ -32,9 +32,8 @@
             if (typeof newValues[1] === 'number' &&
                 typeof newValues[2] === 'number') {
               scope.model.age = ehaDateOfBirthOrAgeService
-                                  .getAgeFromBirthDate(scope.birthYear,
-                                                       scope.birthMonth);
-              console.log(scope.model.age);
+                                  .getAgeFromBirthDate(newValues[2],
+                                                       newValues[1]);
             }
           }
         );
@@ -42,7 +41,6 @@
         scope.$watchCollection(
           '[model.age.years, model.age.months]',
           function(newValues, oldValues) {
-            console.log(newValues, oldValues);
             if (angular.equals(newValues, oldValues)) {
               return;
             }
@@ -52,14 +50,12 @@
 
               var dateOfBirth = ehaDateOfBirthOrAgeService
                                     .getBirthDateFromAge(
-                                      scope.model.age.years,
-                                      scope.model.age.months);
+                                      newValues[0],
+                                      newValues[1]
+                                    );
 
               scope.model.birthYear = dateOfBirth.year;
               scope.model.birthMonth = dateOfBirth.month;
-
-              console.log(dateOfBirth);
-
             }
           }
         );
@@ -123,10 +119,10 @@
       years = years || 0;
       var birthDate = moment()
                         .subtract(months, 'months')
-                        .subtract(years, 'years');
+                        .subtract(years, 'year');
 
       return {
-        year: birthDate.years(),
+        year: birthDate.year(),
         month: birthDate.months()
       };
     };

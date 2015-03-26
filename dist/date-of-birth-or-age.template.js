@@ -3,47 +3,66 @@ angular.module('eha.date-of-birth-or-age.template', ['templates/date-of-birth-or
 angular.module("templates/date-of-birth-or-age.directive.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/date-of-birth-or-age.directive.tpl.html",
     "<div class=\"component date-of-birth-or-age\">\n" +
-    "  <label class=\"block\" translate>Date of birth:</label>\n" +
-    "<!-- Whitespace between elements is significant, please don't reformat the next 3 divs -->\n" +
-    "<div class=\"form-group birthday\">\n" +
-    "    <label translate>Day</label><br/>\n" +
-    "    <select class=\"form-control\"\n" +
-    "            ng-model=\"model.birthDay\"\n" +
-    "            ng-options=\"(days.indexOf(day) + 1) as day for day in days\"\n" +
-    "            tab-to-next-input-on-enter\n" +
-    "            >\n" +
-    "    </select>\n" +
-    "</div><div class=\"form-group month\">\n" +
-    "    <label translate>Month</label><br/>\n" +
-    "    <select class=\"form-control\"\n" +
-    "            ng-model=\"model.birthMonth\"\n" +
-    "            ng-options=\"(months.indexOf(month) + 1) as month for month in months\"\n" +
-    "            tab-to-next-input-on-enter >\n" +
-    "    </select>\n" +
-    "</div><div class=\"form-group year\">\n" +
-    "    <label translate>Year</label><br/>\n" +
-    "    <select class=\"form-control\"\n" +
-    "            ng-model=\"model.birthYear\"\n" +
-    "            ng-options=\"year as year for year in years\"\n" +
-    "            tab-to-next-input-on-enter >\n" +
-    "    </select>\n" +
-    "</div>\n" +
-    "<label class=\"block\" translate>Age:</label>\n" +
-    "<div class=\"form-group age-years\">\n" +
-    "    <label translate>Years</label><br/>\n" +
-    "    <input type=\"number\" min=\"0\" max=\"120\" step=\"1\" class=\"form-control center-text\" name=\"ageYears\"\n" +
-    "            ng-model=\"model.age.years\"\n" +
-    "            select-on-focus\n" +
-    "            tab-to-next-input-on-enter\n" +
-    "            />\n" +
-    "<!-- Whitespace is significant, please don't reformat the next line -->\n" +
-    "</div><span class=\"backslash\">/</span><div class=\"form-group age-months\">\n" +
-    "    <label translate>Months</label><br/>\n" +
-    "    <input type=\"number\" min=\"0\" max=\"11\" step=\"1\" class=\"form-control center-text\" name=\"ageMonths\"\n" +
-    "      ng-model=\"model.age.months\"\n" +
-    "      select-on-focus\n" +
-    "      tab-to-next-input-on-enter />\n" +
-    "</div>\n" +
+    "  <form name=\"dateOfBirthOrAgeDirectiveForm\">\n" +
+    "    <label class=\"block\" translate>Date of birth:</label>\n" +
+    "    <!-- Whitespace between elements is significant, please don't reformat the next 3 divs -->\n" +
+    "    <div class=\"form-group birthday\">\n" +
+    "      <label translate>Day</label><br/>\n" +
+    "      <select class=\"form-control\"\n" +
+    "        name=\"birthDay\"\n" +
+    "        ng-model=\"model.birthDay\"\n" +
+    "        ng-options=\"day for day in days track by day\"\n" +
+    "        tab-to-next-input-on-enter\n" +
+    "        >\n" +
+    "      </select>\n" +
+    "      </div><div class=\"form-group month\">\n" +
+    "      <label translate>Month</label><br/>\n" +
+    "      <select class=\"form-control\"\n" +
+    "        name=\"birthMonth\"\n" +
+    "        ng-model=\"model.birthMonth\"\n" +
+    "        ng-options=\"months.indexOf(month) as month for month in months\"\n" +
+    "        tab-to-next-input-on-enter >\n" +
+    "      </select>\n" +
+    "      </div><div class=\"form-group year\">\n" +
+    "      <label translate>Year</label><br/>\n" +
+    "      <select class=\"form-control\"\n" +
+    "        name=\"birthYear\"\n" +
+    "        ng-model=\"model.birthYear\"\n" +
+    "        ng-options=\"year for year in years track by year\"\n" +
+    "        tab-to-next-input-on-enter >\n" +
+    "      </select>\n" +
+    "    </div>\n" +
+    "    <label class=\"block\" translate>Age:</label>\n" +
+    "    <div class=\"form-group age-years\">\n" +
+    "      <label translate>Years</label><br/>\n" +
+    "      <input\n" +
+    "        type=\"number\"\n" +
+    "        min=\"0\"\n" +
+    "        max=\"120\"\n" +
+    "        step=\"1\"\n" +
+    "        class=\"form-control center-text\"\n" +
+    "        name=\"ageYears\"\n" +
+    "        ng-model=\"model.age.years\"\n" +
+    "        select-on-focus\n" +
+    "        tab-to-next-input-on-enter\n" +
+    "      />\n" +
+    "      <!-- Whitespace is significant, please don't reformat the next line -->\n" +
+    "      </div><span class=\"backslash\">/</span><div class=\"form-group age-months\">\n" +
+    "      <label translate>Months</label><br/>\n" +
+    "      <input\n" +
+    "        name=\"ageMonths\"\n" +
+    "        type=\"number\"\n" +
+    "        min=\"0\"\n" +
+    "        max=\"11\"\n" +
+    "        step=\"1\"\n" +
+    "        class=\"form-control center-text\"\n" +
+    "        name=\"ageMonths\"\n" +
+    "        ng-model=\"model.age.months\"\n" +
+    "        select-on-focus\n" +
+    "        tab-to-next-input-on-enter\n" +
+    "      />\n" +
+    "    </div>\n" +
+    "  </form>\n" +
     "</div>\n" +
     "");
 }]);
@@ -82,9 +101,8 @@ angular.module("templates/date-of-birth-or-age.directive.tpl.html", []).run(["$t
             if (typeof newValues[1] === 'number' &&
                 typeof newValues[2] === 'number') {
               scope.model.age = ehaDateOfBirthOrAgeService
-                                  .getAgeFromBirthDate(scope.birthYear,
-                                                       scope.birthMonth);
-              console.log(scope.model.age);
+                                  .getAgeFromBirthDate(newValues[2],
+                                                       newValues[1]);
             }
           }
         );
@@ -92,7 +110,6 @@ angular.module("templates/date-of-birth-or-age.directive.tpl.html", []).run(["$t
         scope.$watchCollection(
           '[model.age.years, model.age.months]',
           function(newValues, oldValues) {
-            console.log(newValues, oldValues);
             if (angular.equals(newValues, oldValues)) {
               return;
             }
@@ -102,14 +119,12 @@ angular.module("templates/date-of-birth-or-age.directive.tpl.html", []).run(["$t
 
               var dateOfBirth = ehaDateOfBirthOrAgeService
                                     .getBirthDateFromAge(
-                                      scope.model.age.years,
-                                      scope.model.age.months);
+                                      newValues[0],
+                                      newValues[1]
+                                    );
 
               scope.model.birthYear = dateOfBirth.year;
               scope.model.birthMonth = dateOfBirth.month;
-
-              console.log(dateOfBirth);
-
             }
           }
         );
@@ -173,10 +188,10 @@ angular.module("templates/date-of-birth-or-age.directive.tpl.html", []).run(["$t
       years = years || 0;
       var birthDate = moment()
                         .subtract(months, 'months')
-                        .subtract(years, 'years');
+                        .subtract(years, 'year');
 
       return {
-        year: birthDate.years(),
+        year: birthDate.year(),
         month: birthDate.months()
       };
     };
