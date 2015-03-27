@@ -11,6 +11,7 @@
   ngModule.directive('ehaDateOfBirthOrAge',
                      function(ehaDateOfBirthOrAgeService) {
     return {
+      restrict: 'E',
       templateUrl: 'templates/date-of-birth-or-age.directive.tpl.html',
       scope: {
         model: '=model'
