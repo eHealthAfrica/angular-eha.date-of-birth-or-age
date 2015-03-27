@@ -1,6 +1,6 @@
 {
   "name": "angular-eha.date-of-birth-or-age",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Date of Birth or Age directive",
   "main": "dist/date-of-birth-or-age.template.js",
   "scripts": {
