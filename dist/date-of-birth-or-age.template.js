@@ -80,6 +80,7 @@ angular.module("templates/date-of-birth-or-age.directive.tpl.html", []).run(["$t
   ngModule.directive('ehaDateOfBirthOrAge',
                      ['ehaDateOfBirthOrAgeService', function(ehaDateOfBirthOrAgeService) {
     return {
+      restrict: 'E',
       templateUrl: 'templates/date-of-birth-or-age.directive.tpl.html',
       scope: {
         model: '=model'
