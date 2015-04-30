@@ -124,7 +124,7 @@
 
       return {
         year: birthDate.year(),
-        month: birthDate.months()
+        month: birthDate.months() + 1
       };
     };
 
@@ -138,13 +138,13 @@
         return;
       }
 
-      var birthTimestamp = moment([birthYear, birthMonth - 1]).unix();
+      var birthTimestamp = moment([birthYear, birthMonth]).unix();
       var nowTimestamp = currentMoment.unix();
       var duration = moment.duration(nowTimestamp - birthTimestamp, 'seconds');
 
       return {
         years: duration.years(),
-        months: duration.months()
+        months: duration.months() + 1
       };
     };
   }]);

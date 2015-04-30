@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - unreleased
 
+### Changed
+
+- Refactored service, directive and template
+
 ## v1.0.0 - 26/03/2015
 
 ### Added
