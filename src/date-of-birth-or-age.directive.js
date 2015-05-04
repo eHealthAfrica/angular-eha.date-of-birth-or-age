@@ -21,45 +21,32 @@
         scope.months = ehaDateOfBirthOrAgeService.getMonths();
         scope.years = ehaDateOfBirthOrAgeService.getYears();
 
-        scope.$watchCollection(
-          '[model.birthDay, model.birthMonth, model.birthYear]',
-          function(newValues, oldValues) {
-            if (angular.equals(newValues, oldValues)) {
-              return;
-            }
-
-            // Don't default to current month, year, Sprint.ly #1045
-            // (interpreted as 'only set age when year and month is defined)
-            if (typeof newValues[1] === 'number' &&
-                typeof newValues[2] === 'number') {
-              scope.model.age = ehaDateOfBirthOrAgeService
-                                  .getAgeFromBirthDate(newValues[2],
-                                                       newValues[1]);
-            }
+        scope.getAgeFromDob = function() {
+          // Don't default to current month, year, Sprint.ly #1045
+          // (interpreted as 'only set age when year and month is defined)
+          if (typeof scope.model.birthMonth === 'number' &&
+              typeof scope.model.birthYear === 'number') {
+            scope.model.age = ehaDateOfBirthOrAgeService
+          .getAgeFromBirthDate(scope.model.birthYear,
+                               scope.model.birthMonth,
+                               scope.model.birthDay);
           }
-        );
+        };
 
-        scope.$watchCollection(
-          '[model.age.years, model.age.months]',
-          function(newValues, oldValues) {
-            if (angular.equals(newValues, oldValues)) {
-              return;
-            }
+        scope.getDobFromAge = function() {
+          if (typeof scope.model.age.years === 'number' ||
+              typeof scope.model.age.months === 'number') {
 
-            if (typeof newValues[0] === 'number' ||
-                typeof newValues[1] === 'number') {
+            var dateOfBirth = ehaDateOfBirthOrAgeService
+            .getBirthDateFromAge(
+              scope.model.age.years,
+              scope.model.age.months
+            );
 
-              var dateOfBirth = ehaDateOfBirthOrAgeService
-                                    .getBirthDateFromAge(
-                                      newValues[0],
-                                      newValues[1]
-                                    );
-
-              scope.model.birthYear = dateOfBirth.year;
-              scope.model.birthMonth = dateOfBirth.month;
-            }
+            scope.model.birthYear = dateOfBirth.year;
+            scope.model.birthMonth = dateOfBirth.month;
           }
-        );
+        };
       }
     };
   });

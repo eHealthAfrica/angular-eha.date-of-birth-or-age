@@ -46,32 +46,44 @@
       months = months || 0;
       years = years || 0;
       var birthDate = moment()
+                        .subtract(moment().days(), 'days')
                         .subtract(months, 'months')
                         .subtract(years, 'year');
 
       return {
         year: birthDate.year(),
-        month: birthDate.months()
+        month: birthDate.months() + 1
       };
     };
 
-    this.getAgeFromBirthDate = function(year, month) {
+    this.getAgeFromBirthDate = function(year, month, day) {
       var birthYear = year || currentYear;
       var birthMonth = month || currentMonth;
+      var birthDay = day || moment().date();
 
       // ignore birth dates set in the future
-      if (birthYear > currentYear || birthYear === currentYear &&
+      if (birthYear > currentYear ||
+          birthYear === currentYear &&
           birthMonth > currentMonth) {
         return;
       }
 
-      var birthTimestamp = moment([birthYear, birthMonth - 1]).unix();
+      var birthTimestamp = moment([birthYear, birthMonth, birthDay]).unix();
       var nowTimestamp = currentMoment.unix();
       var duration = moment.duration(nowTimestamp - birthTimestamp, 'seconds');
 
+      // Create a month offset by rounding the day of the month.
+      // n.b moments.duration().months() method returns a 0 indexed month value
+      // just like native Date()
+      var days = duration.days();
+      var monthOffset = 2;
+      if (days > 0) {
+        monthOffset += Math.round(days / 31);
+      }
+
       return {
         years: duration.years(),
-        months: duration.months()
+        months: duration.months() + monthOffset
       };
     };
   });
