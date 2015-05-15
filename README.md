@@ -2,6 +2,11 @@
 
 [![Build Status](https://travis-ci.org/eHealthAfrica/angular-eha.date-of-birth-or-age.svg)](https://travis-ci.org/eHealthAfricaangular-eha.date-of-birth-or-age) ![Dependecy Status](https://david-dm.org/eHealthAfrica/angular-eha.date-of-birth-or-age.svg) ![Dev Dependecy Status](https://david-dm.org/eHealthAfrica/angular-eha.date-of-birth-or-age/dev-status.svg)
 
+> Date of birth & Age features
+
+[Demo][].
+
+[demo]: http://docs.ehealthafrica.org/angular-eha.date-of-birth-or-age/
 
 ## Usage
 
